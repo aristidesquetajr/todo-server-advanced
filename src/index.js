@@ -26,13 +26,13 @@ function checksExistsUserAccount(request, response, next) {
 function checksCreateTodosUserAvailability(request, response, next) {
   const { user } = request;
   
-  const countTodos = user.todos.lenght
+  const countTodos = user.todos.length
 
-  if(user.pro || countTodos < 11) {
+  if((!(user.pro) && countTodos < 10) || user.pro) {
     return next()
   }
 
-  return response.status(403).json({ error: "" })
+  return response.status(403).json({ error: "Update your account" })
 }
 
 function checksTodoExists(request, response, next) {
